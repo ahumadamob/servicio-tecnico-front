@@ -51,3 +51,18 @@ Cámbiala por otro archivo de tema (por ejemplo `@use './cerulean';`).
 - `src/app/features`: módulos/páginas por funcionalidad (ej.: `dashboard`).
 - `src/app/shared` (convención): componentes, pipes y utilidades reutilizables.
 - `src/styles`: estilos globales, variables y temas Bootswatch.
+
+
+## Solución rápida de error de compilación de tema
+
+Si aparece un error como `Could not resolve ... bootswatch/dist/simplex||file:https://fonts.googleapis...`, verifica:
+
+1. Que `src/styles.scss` **no** tenga `@import url(...)` combinando rutas de `node_modules` con URLs externas.
+2. Que el tema se cargue solo desde `src/styles/themes/simplex.scss`.
+3. Que `angular.json` tenga `stylePreprocessorOptions.includePaths` con `node_modules`.
+4. Ejecuta nuevamente:
+
+```bash
+npm install
+ng serve
+```
