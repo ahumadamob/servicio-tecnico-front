@@ -1,13 +1,10 @@
-.shell {
-  max-width: 960px;
-  margin: 3rem auto;
-  padding: 2rem;
-  border-radius: 16px;
-  background: white;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+.app-layout {
+  min-height: 100vh;
+  background-color: #f1f3f5;
+}
 
-  h1 {
-    margin: 0;
-    color: #111827;
-  }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }

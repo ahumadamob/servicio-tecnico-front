@@ -1,0 +1,77 @@
+<section class="dashboard container-fluid py-4">
+  <header class="mb-4">
+    <h1 class="h3 mb-1">Tablero operativo</h1>
+    <p class="text-muted mb-0">Visión general de la operación diaria del taller.</p>
+  </header>
+
+  <div class="row g-4">
+    <div class="col-12 col-lg-4">
+      <article class="card h-100 shadow-sm border-0">
+        <div class="card-header bg-body-secondary fw-semibold">Órdenes por estado</div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item px-0 d-flex justify-content-between align-items-center" *ngFor="let order of ordersByStatus">
+              <span>{{ order.status }}</span>
+              <span class="badge" [class]="'badge ' + order.badgeClass">{{ order.quantity }}</span>
+            </li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <article class="card h-100 shadow-sm border-0">
+        <div class="card-header bg-body-secondary fw-semibold d-flex justify-content-between align-items-center">
+          Alertas de presupuestos pendientes
+          <span class="badge text-bg-danger">{{ pendingQuotes.length }}</span>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-sm table-hover mb-0 align-middle">
+              <thead>
+                <tr>
+                  <th scope="col">Orden</th>
+                  <th scope="col">Cliente</th>
+                  <th scope="col" class="text-end">Tiempo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let quote of pendingQuotes">
+                  <td class="fw-medium">{{ quote.order }}</td>
+                  <td>{{ quote.client }}</td>
+                  <td class="text-end"><span class="badge text-bg-warning">{{ quote.elapsed }}</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <article class="card h-100 shadow-sm border-0">
+        <div class="card-header bg-body-secondary fw-semibold">Equipos listos para entrega</div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-sm table-striped mb-0 align-middle">
+              <thead>
+                <tr>
+                  <th scope="col">Orden</th>
+                  <th scope="col">Equipo</th>
+                  <th scope="col">Cliente</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let delivery of readyForDelivery">
+                  <td class="fw-medium">{{ delivery.order }}</td>
+                  <td>{{ delivery.equipment }}</td>
+                  <td>{{ delivery.client }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
