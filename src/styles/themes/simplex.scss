@@ -1,7 +1,6 @@
-// Tema Simplex de Bootswatch cargado desde node_modules.
+// Tema Bootswatch Simplex cargado desde node_modules.
+$web-font-path: false;
+
 @import 'bootswatch/dist/simplex/variables';
 @import 'bootstrap/scss/bootstrap';
-
-// Evita error de resolución de Sass con imports url() en Angular/esbuild.
-$web-font-path: false;
 @import 'bootswatch/dist/simplex/bootswatch';
