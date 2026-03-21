@@ -1,0 +1,27 @@
+<div class="admin-layout">
+  <header class="topbar navbar navbar-expand bg-white border-bottom sticky-top px-3">
+    <span class="navbar-brand mb-0 h5 fw-semibold">Servicio Tecnico Soft</span>
+    <span class="text-muted small ms-auto">Flujo operativo del taller</span>
+  </header>
+
+  <div class="layout-body d-flex">
+    <aside class="sidebar border-end bg-white p-3">
+      <p class="text-uppercase text-muted small fw-semibold mb-2">Navegación</p>
+      <nav class="nav nav-pills flex-column gap-1">
+        <a
+          *ngFor="let item of navItems"
+          class="nav-link"
+          [routerLink]="item.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item.path === '/dashboard' }"
+        >
+          {{ item.label }}
+        </a>
+      </nav>
+    </aside>
+
+    <main class="content flex-grow-1">
+      <router-outlet />
+    </main>
+  </div>
+</div>

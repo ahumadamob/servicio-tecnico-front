@@ -1,6 +1,11 @@
 /*
- * Global style entrypoint.
- * El tema activo se resuelve en src/styles/themes/_theme-loader.scss
+ * Hoja de estilos global.
+ * Para cambiar de tema, edita solamente src/styles/themes/_active-theme.scss
  */
 @use './styles/variables';
-@use './styles/themes/theme-loader';
+@use './styles/themes/active-theme';
+
+html,
+body {
+  min-height: 100%;
+}
