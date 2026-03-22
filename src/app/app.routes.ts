@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { ClientesComponent } from './features/clientes/clientes.component';
+import { ClienteCreatePageComponent } from './features/clientes/pages/cliente-create-page.component';
+import { ClienteDetailPageComponent } from './features/clientes/pages/cliente-detail-page.component';
+import { ClienteEditPageComponent } from './features/clientes/pages/cliente-edit-page.component';
+import { ClientesListPageComponent } from './features/clientes/pages/clientes-list-page.component';
 import { EntregasComponent } from './features/entregas/entregas.component';
 import { EquiposComponent } from './features/equipos/equipos.component';
 import { OrdenesComponent } from './features/ordenes/ordenes.component';
@@ -17,7 +20,10 @@ export const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'clientes', component: ClientesComponent },
+      { path: 'clientes', component: ClientesListPageComponent },
+      { path: 'clientes/nuevo', component: ClienteCreatePageComponent },
+      { path: 'clientes/:id', component: ClienteDetailPageComponent },
+      { path: 'clientes/:id/editar', component: ClienteEditPageComponent },
       { path: 'equipos', component: EquiposComponent },
       { path: 'ordenes', component: OrdenesComponent },
       { path: 'presupuestos', component: PresupuestosComponent },
