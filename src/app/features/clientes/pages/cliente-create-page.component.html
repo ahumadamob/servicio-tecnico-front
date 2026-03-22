@@ -1,0 +1,15 @@
+<section class="p-4">
+  <app-page-header
+    title="Nuevo cliente"
+    subtitle="Completá los datos administrativos y de contacto."
+  />
+
+  <app-cliente-form
+    [form]="form"
+    [globalErrors]="globalErrors()"
+    [submitting]="saving()"
+    submitLabel="Guardar cliente"
+    (submitted)="save()"
+    (cancelled)="cancel()"
+  />
+</section>

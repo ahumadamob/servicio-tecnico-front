@@ -1,0 +1,15 @@
+.btn-sort {
+  --bs-btn-padding-y: 0;
+  --bs-btn-padding-x: 0;
+  --bs-btn-color: var(--bs-body-color);
+  --bs-btn-font-weight: 600;
+  text-decoration: none;
+}
+
+.btn-icon {
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

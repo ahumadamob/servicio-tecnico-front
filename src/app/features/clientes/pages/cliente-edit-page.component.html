@@ -1,0 +1,16 @@
+<section class="p-4">
+  <app-page-header title="Editar cliente" subtitle="Actualizá la información del cliente." />
+
+  @if (loading()) {
+    <div class="card border-0 shadow-sm"><div class="card-body">Cargando datos...</div></div>
+  } @else {
+    <app-cliente-form
+      [form]="form"
+      [globalErrors]="globalErrors()"
+      [submitting]="saving()"
+      submitLabel="Guardar cambios"
+      (submitted)="save()"
+      (cancelled)="cancel()"
+    />
+  }
+</section>

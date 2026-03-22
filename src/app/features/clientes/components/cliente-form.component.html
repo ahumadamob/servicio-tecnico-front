@@ -1,0 +1,136 @@
+<form [formGroup]="form()" (ngSubmit)="onSubmit()" class="card shadow-sm border-0 fade-view">
+  <div class="card-body p-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="h5 mb-0">Datos del cliente</h2>
+      <span class="badge text-bg-light">Campos obligatorios marcados con *</span>
+    </div>
+
+    @if (globalErrors().length) {
+      <div class="alert alert-danger" role="alert">
+        <ul class="mb-0">
+          @for (error of globalErrors(); track error) {
+            <li>{{ error }}</li>
+          }
+        </ul>
+      </div>
+    }
+
+    <div class="row g-3">
+      <div class="col-md-4">
+        <label class="form-label">Tipo de cliente *</label>
+        <select formControlName="tipoCliente" class="form-select" [class.is-invalid]="hasError('tipoCliente')">
+          <option value="PERSONA">Persona</option>
+          <option value="EMPRESA">Empresa</option>
+        </select>
+        @if (hasError('tipoCliente')) { <div class="invalid-feedback d-block">{{ errorMessage('tipoCliente') }}</div> }
+      </div>
+
+      @if (!isEmpresa()) {
+        <div class="col-md-4">
+          <label class="form-label">Nombre</label>
+          <input formControlName="nombre" type="text" class="form-control" [class.is-invalid]="hasError('nombre')">
+          @if (hasError('nombre')) { <div class="invalid-feedback d-block">{{ errorMessage('nombre') }}</div> }
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Apellido</label>
+          <input formControlName="apellido" type="text" class="form-control" [class.is-invalid]="hasError('apellido')">
+          @if (hasError('apellido')) { <div class="invalid-feedback d-block">{{ errorMessage('apellido') }}</div> }
+        </div>
+      } @else {
+        <div class="col-md-8">
+          <label class="form-label">Razón social</label>
+          <input formControlName="razonSocial" type="text" class="form-control" [class.is-invalid]="hasError('razonSocial')">
+          @if (hasError('razonSocial')) { <div class="invalid-feedback d-block">{{ errorMessage('razonSocial') }}</div> }
+        </div>
+      }
+
+      <div class="col-md-4">
+        <label class="form-label">Tipo de documento</label>
+        <input formControlName="tipoDocumento" type="text" class="form-control" [class.is-invalid]="hasError('tipoDocumento')">
+        @if (hasError('tipoDocumento')) { <div class="invalid-feedback d-block">{{ errorMessage('tipoDocumento') }}</div> }
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Número de documento *</label>
+        <input formControlName="numeroDocumento" type="text" class="form-control" [class.is-invalid]="hasError('numeroDocumento')">
+        @if (hasError('numeroDocumento')) { <div class="invalid-feedback d-block">{{ errorMessage('numeroDocumento') }}</div> }
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">CUIT</label>
+        <input formControlName="cuit" type="text" class="form-control" [class.is-invalid]="hasError('cuit')">
+        @if (hasError('cuit')) { <div class="invalid-feedback d-block">{{ errorMessage('cuit') }}</div> }
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Teléfono principal *</label>
+        <input formControlName="telefonoPrincipal" type="text" class="form-control" [class.is-invalid]="hasError('telefonoPrincipal')">
+        @if (hasError('telefonoPrincipal')) { <div class="invalid-feedback d-block">{{ errorMessage('telefonoPrincipal') }}</div> }
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Teléfono alternativo</label>
+        <input formControlName="telefonoAlternativo" type="text" class="form-control" [class.is-invalid]="hasError('telefonoAlternativo')">
+        @if (hasError('telefonoAlternativo')) { <div class="invalid-feedback d-block">{{ errorMessage('telefonoAlternativo') }}</div> }
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Email *</label>
+        <input formControlName="email" type="email" class="form-control" [class.is-invalid]="hasError('email')">
+        @if (hasError('email')) { <div class="invalid-feedback d-block">{{ errorMessage('email') }}</div> }
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Calle *</label>
+        <input formControlName="calle" type="text" class="form-control" [class.is-invalid]="hasError('calle')">
+        @if (hasError('calle')) { <div class="invalid-feedback d-block">{{ errorMessage('calle') }}</div> }
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Número *</label>
+        <input formControlName="numero" type="text" class="form-control" [class.is-invalid]="hasError('numero')">
+        @if (hasError('numero')) { <div class="invalid-feedback d-block">{{ errorMessage('numero') }}</div> }
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Piso</label>
+        <input formControlName="piso" type="text" class="form-control" [class.is-invalid]="hasError('piso')">
+        @if (hasError('piso')) { <div class="invalid-feedback d-block">{{ errorMessage('piso') }}</div> }
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Depto.</label>
+        <input formControlName="departamento" type="text" class="form-control" [class.is-invalid]="hasError('departamento')">
+        @if (hasError('departamento')) { <div class="invalid-feedback d-block">{{ errorMessage('departamento') }}</div> }
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Código postal *</label>
+        <input formControlName="codigoPostal" type="text" class="form-control" [class.is-invalid]="hasError('codigoPostal')">
+        @if (hasError('codigoPostal')) { <div class="invalid-feedback d-block">{{ errorMessage('codigoPostal') }}</div> }
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Ciudad *</label>
+        <input formControlName="ciudad" type="text" class="form-control" [class.is-invalid]="hasError('ciudad')">
+        @if (hasError('ciudad')) { <div class="invalid-feedback d-block">{{ errorMessage('ciudad') }}</div> }
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Provincia *</label>
+        <input formControlName="provincia" type="text" class="form-control" [class.is-invalid]="hasError('provincia')">
+        @if (hasError('provincia')) { <div class="invalid-feedback d-block">{{ errorMessage('provincia') }}</div> }
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Referencia domicilio</label>
+        <input formControlName="referenciaDomicilio" type="text" class="form-control" [class.is-invalid]="hasError('referenciaDomicilio')">
+        @if (hasError('referenciaDomicilio')) { <div class="invalid-feedback d-block">{{ errorMessage('referenciaDomicilio') }}</div> }
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Observaciones</label>
+        <textarea rows="3" formControlName="observaciones" class="form-control" [class.is-invalid]="hasError('observaciones')"></textarea>
+        @if (hasError('observaciones')) { <div class="invalid-feedback d-block">{{ errorMessage('observaciones') }}</div> }
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer d-flex justify-content-end gap-2 bg-white border-top-0 pb-4 px-4">
+    <button type="button" class="btn btn-outline-secondary rounded-pill px-3" (click)="cancelled.emit()">Cancelar</button>
+    <button type="submit" class="btn btn-primary rounded-pill px-3" [disabled]="submitting()">
+      @if (submitting()) { <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span> }
+      {{ submitLabel() }}
+    </button>
+  </div>
+</form>
