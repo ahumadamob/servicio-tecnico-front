@@ -18,7 +18,7 @@ export class AdminLayoutComponent {
   readonly navItems: NavItem[] = [
     { label: 'Dashboard', path: '/dashboard' },
     { label: 'Clientes', path: '/clientes' },
-    { label: 'Técnicos', path: '/tecnicos' },
+    { label: 'Técnico', path: '/tecnicos' },
     { label: 'Equipos', path: '/equipos' },
     { label: 'Órdenes', path: '/ordenes' },
     { label: 'Presupuestos', path: '/presupuestos' },
