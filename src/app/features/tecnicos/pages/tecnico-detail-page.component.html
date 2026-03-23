@@ -1,0 +1,35 @@
+<section class="p-4 fade-view">
+  <app-page-header title="Detalle de técnico" subtitle="Vista administrativa de solo lectura." />
+
+  @if (loading()) {
+    <div class="card border-0 shadow-sm"><div class="card-body">Cargando detalle...</div></div>
+  } @else if (error()) {
+    <div class="alert alert-danger">{{ error() }}</div>
+  } @else {
+    @if (tecnico(); as detalle) {
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 mb-0">{{ nombreCompleto() }}</h2>
+            <span class="badge" [class.text-bg-success]="detalle.activo" [class.text-bg-secondary]="!detalle.activo">
+              {{ detalle.activo ? 'Activo' : 'Inactivo' }}
+            </span>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6"><strong>Nombre:</strong> {{ detalle.nombre }}</div>
+            <div class="col-md-6"><strong>Apellido:</strong> {{ detalle.apellido }}</div>
+            <div class="col-md-6"><strong>Teléfono:</strong> {{ detalle.telefono }}</div>
+            <div class="col-md-6"><strong>Email:</strong> {{ detalle.email || '-' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end mt-3">
+        <a class="btn btn-primary rounded-pill px-3" [routerLink]="['/tecnicos', detalle.id, 'editar']">
+          <i class="bi bi-pencil me-1"></i>Editar técnico
+        </a>
+      </div>
+    }
+  }
+</section>

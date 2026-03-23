@@ -1,0 +1,16 @@
+<section class="p-4">
+  <app-page-header title="Editar técnico" subtitle="Actualizá los datos del técnico." />
+
+  @if (loading()) {
+    <div class="card border-0 shadow-sm"><div class="card-body">Cargando datos...</div></div>
+  } @else {
+    <app-tecnico-form
+      [form]="form"
+      [globalErrors]="globalErrors()"
+      [submitting]="saving()"
+      submitLabel="Guardar cambios"
+      (submitted)="save()"
+      (cancelled)="cancel()"
+    />
+  }
+</section>

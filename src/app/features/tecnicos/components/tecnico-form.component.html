@@ -1,0 +1,52 @@
+<form [formGroup]="form()" (ngSubmit)="onSubmit()" class="card shadow-sm border-0 fade-view">
+  <div class="card-body p-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="h5 mb-0">Datos del técnico</h2>
+      <span class="badge text-bg-light">Campos obligatorios marcados con *</span>
+    </div>
+
+    @if (globalErrors().length) {
+      <div class="alert alert-danger" role="alert">
+        <ul class="mb-0">
+          @for (error of globalErrors(); track error) {
+            <li>{{ error }}</li>
+          }
+        </ul>
+      </div>
+    }
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Nombre *</label>
+        <input formControlName="nombre" type="text" class="form-control" [class.is-invalid]="hasError('nombre')">
+        @if (hasError('nombre')) { <div class="invalid-feedback d-block">{{ errorMessage('nombre') }}</div> }
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Apellido *</label>
+        <input formControlName="apellido" type="text" class="form-control" [class.is-invalid]="hasError('apellido')">
+        @if (hasError('apellido')) { <div class="invalid-feedback d-block">{{ errorMessage('apellido') }}</div> }
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Teléfono *</label>
+        <input formControlName="telefono" type="text" class="form-control" [class.is-invalid]="hasError('telefono')">
+        @if (hasError('telefono')) { <div class="invalid-feedback d-block">{{ errorMessage('telefono') }}</div> }
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Email</label>
+        <input formControlName="email" type="email" class="form-control" [class.is-invalid]="hasError('email')">
+        @if (hasError('email')) { <div class="invalid-feedback d-block">{{ errorMessage('email') }}</div> }
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer d-flex justify-content-end gap-2 bg-white border-top-0 pb-4 px-4">
+    <button type="button" class="btn btn-outline-secondary rounded-pill px-3" (click)="cancelled.emit()">Cancelar</button>
+    <button type="submit" class="btn btn-primary rounded-pill px-3" [disabled]="submitting()">
+      @if (submitting()) { <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span> }
+      {{ submitLabel() }}
+    </button>
+  </div>
+</form>

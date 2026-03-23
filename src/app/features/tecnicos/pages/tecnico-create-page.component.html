@@ -1,0 +1,15 @@
+<section class="p-4">
+  <app-page-header
+    title="Nuevo técnico"
+    subtitle="Completá los datos básicos del técnico."
+  />
+
+  <app-tecnico-form
+    [form]="form"
+    [globalErrors]="globalErrors()"
+    [submitting]="saving()"
+    submitLabel="Guardar técnico"
+    (submitted)="save()"
+    (cancelled)="cancel()"
+  />
+</section>
