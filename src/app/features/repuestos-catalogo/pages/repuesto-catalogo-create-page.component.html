@@ -1,0 +1,20 @@
+<section class="p-4 fade-view">
+  <app-page-header
+    title="Nuevo repuesto de catálogo"
+    subtitle="Completá tipo, nombre y descripción del repuesto."
+  />
+
+  @if (loading()) {
+    <div class="card border-0 shadow-sm"><div class="card-body">Cargando tipos de repuesto...</div></div>
+  } @else {
+    <app-repuesto-catalogo-form
+      [form]="form"
+      [tiposRepuesto]="tiposRepuesto()"
+      [globalErrors]="globalErrors()"
+      [submitting]="saving()"
+      submitLabel="Guardar repuesto"
+      (submitted)="save()"
+      (cancelled)="cancel()"
+    />
+  }
+</section>

@@ -1,0 +1,15 @@
+<section class="p-4 fade-view">
+  <app-page-header
+    title="Nuevo tipo de repuesto"
+    subtitle="Definí una categoría para clasificar repuestos del catálogo."
+  />
+
+  <app-tipo-repuesto-form
+    [form]="form"
+    [globalErrors]="globalErrors()"
+    [submitting]="saving()"
+    submitLabel="Guardar tipo de repuesto"
+    (submitted)="save()"
+    (cancelled)="cancel()"
+  />
+</section>

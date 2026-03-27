@@ -22,7 +22,8 @@ export class AdminLayoutComponent {
     { label: 'Equipos', path: '/equipos' },
     { label: 'Órdenes', path: '/ordenes' },
     { label: 'Presupuestos', path: '/presupuestos' },
-    { label: 'Repuestos', path: '/repuestos' },
+    { label: 'Tipos de repuesto', path: '/tipos-repuesto' },
+    { label: 'Repuestos de catálogo', path: '/repuestos-catalogo' },
     { label: 'Pagos', path: '/pagos' },
     { label: 'Entregas', path: '/entregas' },
     { label: 'Seguimiento', path: '/seguimiento' }
