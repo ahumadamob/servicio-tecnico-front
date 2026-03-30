@@ -9,8 +9,15 @@ import { EquiposComponent } from './features/equipos/equipos.component';
 import { OrdenesComponent } from './features/ordenes/ordenes.component';
 import { PagosComponent } from './features/pagos/pagos.component';
 import { PresupuestosComponent } from './features/presupuestos/presupuestos.component';
-import { RepuestosComponent } from './features/repuestos/repuestos.component';
+import { RepuestoCatalogoCreatePageComponent } from './features/repuestos-catalogo/pages/repuesto-catalogo-create-page.component';
+import { RepuestoCatalogoDetailPageComponent } from './features/repuestos-catalogo/pages/repuesto-catalogo-detail-page.component';
+import { RepuestoCatalogoEditPageComponent } from './features/repuestos-catalogo/pages/repuesto-catalogo-edit-page.component';
+import { RepuestosCatalogoListPageComponent } from './features/repuestos-catalogo/pages/repuestos-catalogo-list-page.component';
 import { SeguimientoComponent } from './features/seguimiento/seguimiento.component';
+import { TipoRepuestoCreatePageComponent } from './features/tipos-repuesto/pages/tipo-repuesto-create-page.component';
+import { TipoRepuestoDetailPageComponent } from './features/tipos-repuesto/pages/tipo-repuesto-detail-page.component';
+import { TipoRepuestoEditPageComponent } from './features/tipos-repuesto/pages/tipo-repuesto-edit-page.component';
+import { TiposRepuestoListPageComponent } from './features/tipos-repuesto/pages/tipos-repuesto-list-page.component';
 import { TecnicoCreatePageComponent } from './features/tecnicos/pages/tecnico-create-page.component';
 import { TecnicoDetailPageComponent } from './features/tecnicos/pages/tecnico-detail-page.component';
 import { TecnicoEditPageComponent } from './features/tecnicos/pages/tecnico-edit-page.component';
@@ -35,7 +42,14 @@ export const routes: Routes = [
       { path: 'equipos', component: EquiposComponent },
       { path: 'ordenes', component: OrdenesComponent },
       { path: 'presupuestos', component: PresupuestosComponent },
-      { path: 'repuestos', component: RepuestosComponent },
+      { path: 'tipos-repuesto', component: TiposRepuestoListPageComponent },
+      { path: 'tipos-repuesto/nuevo', component: TipoRepuestoCreatePageComponent },
+      { path: 'tipos-repuesto/:id', component: TipoRepuestoDetailPageComponent },
+      { path: 'tipos-repuesto/:id/editar', component: TipoRepuestoEditPageComponent },
+      { path: 'repuestos-catalogo', component: RepuestosCatalogoListPageComponent },
+      { path: 'repuestos-catalogo/nuevo', component: RepuestoCatalogoCreatePageComponent },
+      { path: 'repuestos-catalogo/:id', component: RepuestoCatalogoDetailPageComponent },
+      { path: 'repuestos-catalogo/:id/editar', component: RepuestoCatalogoEditPageComponent },
       { path: 'pagos', component: PagosComponent },
       { path: 'entregas', component: EntregasComponent },
       { path: 'seguimiento', component: SeguimientoComponent }

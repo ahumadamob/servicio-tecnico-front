@@ -1,0 +1,16 @@
+<section class="p-4 fade-view">
+  <app-page-header title="Editar tipo de repuesto" subtitle="Actualizá la categoría del catálogo." />
+
+  @if (loading()) {
+    <div class="card border-0 shadow-sm"><div class="card-body">Cargando datos...</div></div>
+  } @else {
+    <app-tipo-repuesto-form
+      [form]="form"
+      [globalErrors]="globalErrors()"
+      [submitting]="saving()"
+      submitLabel="Guardar cambios"
+      (submitted)="save()"
+      (cancelled)="cancel()"
+    />
+  }
+</section>

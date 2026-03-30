@@ -1,0 +1,36 @@
+<section class="p-4 fade-view">
+  <app-page-header title="Detalle de repuesto de catálogo" subtitle="Vista administrativa de solo lectura." />
+
+  @if (loading()) {
+    <div class="card border-0 shadow-sm"><div class="card-body">Cargando detalle...</div></div>
+  } @else if (error()) {
+    <div class="alert alert-danger">{{ error() }}</div>
+  } @else {
+    @if (item(); as detalle) {
+      <div class="card border-0 shadow-sm mb-3">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 mb-0">{{ detalle.nombre }}</h2>
+            <span class="badge" [class.text-bg-success]="detalle.activo" [class.text-bg-secondary]="!detalle.activo">
+              {{ detalle.activo ? 'Activo' : 'Inactivo' }}
+            </span>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-md-6"><strong>Tipo de repuesto:</strong> {{ detalle.tipoRepuesto.nombre }}</div>
+            <div class="col-md-6"><strong>Nombre:</strong> {{ detalle.nombre }}</div>
+            <div class="col-12"><strong>Descripción:</strong> {{ detalle.descripcion }}</div>
+          </div>
+        </div>
+      </div>
+
+      <app-repuesto-compatibilidades [repuestoId]="detalle.id" />
+
+      <div class="d-flex justify-content-end mt-3">
+        <a class="btn btn-primary rounded-pill px-3" [routerLink]="['/repuestos-catalogo', detalle.id, 'editar']">
+          <i class="bi bi-pencil me-1"></i>Editar repuesto
+        </a>
+      </div>
+    }
+  }
+</section>
