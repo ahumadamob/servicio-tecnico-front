@@ -1,0 +1,165 @@
+<section class="p-4 fade-view">
+  <app-page-header title="Órdenes" subtitle="Consultá y seguí el estado operativo de las órdenes de trabajo." />
+
+  <div class="card border-0 shadow-sm mb-3">
+    <div class="card-body">
+      <form [formGroup]="filtersForm" (ngSubmit)="aplicarFiltros()" class="row g-3 align-items-end">
+        <div class="col-12 col-xl-4">
+          <label class="form-label mb-1" for="busqueda">Búsqueda</label>
+          <input
+            id="busqueda"
+            type="text"
+            class="form-control"
+            formControlName="busqueda"
+            placeholder="Código, seguimiento, cliente, documento, teléfono, IMEI"
+          />
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-2">
+          <label class="form-label mb-1" for="estado">Estado</label>
+          <input id="estado" type="text" class="form-control" formControlName="estado" placeholder="Ej: EN_REPARACION" />
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-2">
+          <label class="form-label mb-1" for="tecnicoId">Técnico</label>
+          <select id="tecnicoId" class="form-select" formControlName="tecnicoId">
+            <option value="">Todos</option>
+            @for (tecnico of tecnicos(); track tecnico.id) {
+              <option [value]="tecnico.id">{{ tecnico.nombreCompleto }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="col-6 col-xl-2">
+          <label class="form-label mb-1" for="fechaDesde">Desde</label>
+          <input id="fechaDesde" type="date" class="form-control" formControlName="fechaDesde" />
+        </div>
+
+        <div class="col-6 col-xl-2">
+          <label class="form-label mb-1" for="fechaHasta">Hasta</label>
+          <input id="fechaHasta" type="date" class="form-control" formControlName="fechaHasta" />
+        </div>
+
+        <div class="col-12 d-flex gap-2 justify-content-end">
+          <button type="button" class="btn btn-outline-secondary" (click)="limpiarFiltros()" [disabled]="loading()">
+            <i class="bi bi-x-circle me-1"></i>
+            Limpiar
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="loading()">
+            <i class="bi bi-search me-1"></i>
+            Buscar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="alert alert-danger d-flex align-items-center justify-content-between gap-3" role="alert">
+      <span>{{ errorMessage() }}</span>
+      <button type="button" class="btn btn-sm btn-outline-danger" (click)="reintentar()">
+        <i class="bi bi-arrow-clockwise me-1"></i>
+        Reintentar
+      </button>
+    </div>
+  }
+
+  @if (loading()) {
+    <div class="card border-0 shadow-sm"><div class="card-body">Cargando órdenes...</div></div>
+  } @else if (!ordenes().length) {
+    <app-empty-state
+      title="No hay órdenes para los filtros aplicados"
+      description="Probá con otros criterios de búsqueda o limpiá los filtros para volver a consultar."
+    />
+  } @else {
+    <div class="card border-0 shadow-sm">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>
+                <button type="button" class="btn btn-link btn-sort" (click)="toggleSort('codigoOrden')">
+                  Código
+                  <i class="bi" [ngClass]="sortIconFor('codigoOrden')"></i>
+                </button>
+              </th>
+              <th>Seguimiento</th>
+              <th>
+                <button type="button" class="btn btn-link btn-sort" (click)="toggleSort('fechaIngreso')">
+                  Fecha ingreso
+                  <i class="bi" [ngClass]="sortIconFor('fechaIngreso')"></i>
+                </button>
+              </th>
+              <th>
+                <button type="button" class="btn btn-link btn-sort" (click)="toggleSort('estado')">
+                  Estado
+                  <i class="bi" [ngClass]="sortIconFor('estado')"></i>
+                </button>
+              </th>
+              <th>
+                <button type="button" class="btn btn-link btn-sort" (click)="toggleSort('clienteNombre')">
+                  Cliente
+                  <i class="bi" [ngClass]="sortIconFor('clienteNombre')"></i>
+                </button>
+              </th>
+              <th>Teléfono</th>
+              <th>Marca</th>
+              <th>Modelo</th>
+              <th>IMEI/Serie</th>
+              <th>
+                <button type="button" class="btn btn-link btn-sort" (click)="toggleSort('tecnicoNombre')">
+                  Técnico
+                  <i class="bi" [ngClass]="sortIconFor('tecnicoNombre')"></i>
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (orden of ordenes(); track orden.id) {
+              <tr>
+                <td>{{ orden.codigoOrden }}</td>
+                <td>{{ orden.codigoSeguimientoPublico || '-' }}</td>
+                <td>{{ orden.fechaIngreso | date: 'dd/MM/yyyy' }}</td>
+                <td><span class="badge text-bg-light border">{{ orden.estado }}</span></td>
+                <td>{{ orden.clienteNombre }}</td>
+                <td>{{ orden.telefonoPrincipal || '-' }}</td>
+                <td>{{ orden.marcaNombre || '-' }}</td>
+                <td>{{ orden.modeloNombre || '-' }}</td>
+                <td>{{ orden.imeiSerie || '-' }}</td>
+                <td>{{ orden.tecnicoNombre || '-' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card-footer bg-white d-flex flex-wrap gap-3 justify-content-between align-items-center">
+        <small class="text-muted">
+          Mostrando {{ rangeStart() }} - {{ rangeEnd() }} de {{ totalElements() }} órdenes
+        </small>
+
+        <div class="d-flex align-items-center gap-2 flex-wrap justify-content-end">
+          <label for="pageSize" class="small text-muted">Tamaño</label>
+          <select id="pageSize" class="form-select form-select-sm page-size" [value]="size()" (change)="onPageSizeChange($event)">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+          </select>
+
+          <button type="button" class="btn btn-outline-secondary btn-sm" (click)="goToPage(page() - 1)" [disabled]="page() === 0">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <span class="small text-muted">Página {{ page() + 1 }} de {{ totalPages() || 1 }}</span>
+          <button
+            type="button"
+            class="btn btn-outline-secondary btn-sm"
+            (click)="goToPage(page() + 1)"
+            [disabled]="page() + 1 >= totalPages()"
+          >
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</section>
